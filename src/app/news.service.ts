@@ -8,10 +8,20 @@ import { map } from 'rxjs';
 export class NewsService {
 
   constructor(private http: HttpClient) {}
+ 
+
+  getTopHeadlines() {
+    const url = 'https://newsapi.org/v2/top-headlines';
+    const response = this.http.get(url, {
+      params: {
+        apiKey: 'e42f8b9bc5634d3aa38460bf04b256f6'
+      }
+    });
+    return response;
+  }
 
   getNews() {
     const url = 'https://newsapi.org/v2/top-headlines';
-    console.log("inside get");
     const response = this.http.get(url, {
       params: {
         country: 'us',
@@ -19,24 +29,28 @@ export class NewsService {
       }
     });
     return response;
-    /*.pipe(map((data: any) =>{
-      console.log(data);
-      return data;
-    }));*/
-  }
+}
 
-  /*postNews(title: string, content: string) {
-    const url = 'https://apilist.fun/api/news';
-    const body = {
-      title: title,
-      content: content
-    };
-    const response = this.http.post(url, body, {
+  getBBCNews(){
+    const url ='https://newsapi.org/v2/top-headlines';
+    const response = this.http.get(url, {
       params: {
+        sources: 'bbc-news',
         apiKey: 'e42f8b9bc5634d3aa38460bf04b256f6'
       }
     });
-    return response.pipe(map(data => data));
+    return response;
   }
-*/
+
+getTechnologyNews(){
+  const url ='https://newsapi.org/v2/top-headlines';
+    const response = this.http.get(url, {
+      params: {
+        language: 'en',
+        category:'Technology',
+        apiKey: 'e42f8b9bc5634d3aa38460bf04b256f6'
+      }
+    });  
+    return response;
+}
 }
